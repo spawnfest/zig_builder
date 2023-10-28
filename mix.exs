@@ -5,7 +5,7 @@ defmodule ZigBuilder.MixProject do
     [
       app: :zig_builder,
       version: "0.1.0",
-      elixir: "~> 1.15",
+      elixir: "~> 1.15.7",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -14,7 +14,7 @@ defmodule ZigBuilder.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :inets, :crypto, :public_key, :ssl]
     ]
   end
 
