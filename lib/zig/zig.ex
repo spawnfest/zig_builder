@@ -88,9 +88,9 @@ defmodule ZigBuilder.Zig do
     raise "windows is not supported, and will be supported in zigler 0.11"
   end
 
-  @zig_dir_path Path.expand("../../_build", Path.dirname(__ENV__.file))
+  @zig_dir_path Path.join([File.cwd!(), "_build"])
 
-  defp directory, do: Path.join(@zig_dir_path, "zig-#{os_arch()}-0.10.1")
+  def directory, do: Path.join(@zig_dir_path, "zig-#{os_arch()}-#{configured_version()}")
 
   def fetch!() do
     version = configured_version()
@@ -112,14 +112,13 @@ defmodule ZigBuilder.Zig do
 
       archive = "zig-#{os_arch()}-#{configured_version()}#{extension}"
 
-      # TODO: clean this up.
-      Logger.configure(level: :info)
-
       zig_download_path = Path.join(@zig_dir_path, archive)
       download_zig_archive(zig_download_path, version, archive)
 
       # untar the zig directory.
       unarchive_zig(archive)
+    else
+      Logger.info("Binary already downloaded.")
     end
 
     :global.del_lock({__MODULE__, self()})
