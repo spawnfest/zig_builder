@@ -168,6 +168,38 @@ defmodule ZigBuilder.Zig do
     System.cmd("tar", ["xvf", archive], cd: @zig_dir_path)
   end
 
+  @doc """
+  Returns the version of the zig_builder executable.
+
+  Returns `{:ok, version_string}` on success or `:error` when the executable
+  is not available.
+  """
+  def bin_version do
+    path = bin_path()
+
+    with true <- File.exists?(path),
+         {_out, 0} <- System.cmd(path <> "/zig", ["--help"]) do
+      {:ok, configured_version()}
+    else
+      _ -> :error
+    end
+  end
+
+  @doc """
+  Returns the path to the executable.
+
+  The executable may not be available if it was not yet installed.
+  """
+  def bin_path do
+    name = "zig-#{os_arch()}-#{configured_version()}"
+
+    if Code.ensure_loaded?(Mix.Project) do
+      Path.join(Path.dirname(Mix.Project.build_path()), name)
+    else
+      Path.expand("_build/#{name}")
+    end
+  end
+
   def zig_downloaded?() do
     File.exists?(directory())
   end
