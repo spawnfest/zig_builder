@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Zig.Get do
+defmodule Mix.Tasks.ZigBuilder.Get do
   use Mix.Task
 
   @shortdoc "Get the zig from online"

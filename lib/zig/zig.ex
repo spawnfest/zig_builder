@@ -81,11 +81,10 @@ defmodule ZigBuilder.Zig do
     do: """
       it seems like you are compiling from an unsupported architecture:
         #{:erlang.system_info(:system_architecture)}
-      Please leave an issue at https://github.com/ityonemo/zigler/issues
     """
 
   defp windows_warn do
-    raise "windows is not supported, and will be supported in zigler 0.11"
+    raise "windows is not supported, and will be supported later"
   end
 
   @zig_dir_path Path.join([File.cwd!(), "_build"])
