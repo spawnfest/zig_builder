@@ -23,7 +23,7 @@ defmodule Mix.Tasks.ZigBuilder.Compile do
     # base = exec |> Path.basename() |> Path.rootname()
     args = ["build"] |> List.flatten()
 
-    case GenerateUtils.cmd(exec, args, cwd, [], false) do
+    case GenerateUtils.cmd(exec, args, cwd, [], true, false) do
       0 ->
         zig_build_file = Path.join([cwd, "build.zig"])
         destination = Path.join([File.cwd!(), "build.zig"])
