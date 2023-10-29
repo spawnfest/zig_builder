@@ -1,13 +1,16 @@
 defmodule ZigBuilder.GenerateUtils do
   # Runs `exec [args]` in `cwd` and prints the stdout and stderr in real time,
   # as soon as `exec` prints them (using `IO.Stream`).
-  def cmd(exec, args, cwd, env, verbose?) do
+  def cmd(exec, args, cwd, env, std_output \\ "false", verbose?) do
     opts = [
-      # into: IO.stream(:stdio, :line),
       stderr_to_stdout: true,
       cd: cwd,
       env: env
     ]
+
+    if std_output do
+      Keyword.put(opts, :into, IO.stream(:stdio, :line))
+    end
 
     if verbose? do
       print_verbose_info(exec, args)

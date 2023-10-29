@@ -18,7 +18,7 @@ defmodule ZigBuilder.Compiler do
   end
 
   def build(config, task_args) do
-    exec = "zig"
+    exec = Path.join([ZigBuilder.Zig.directory(), "zig"])
     env = default_env(config, %{})
 
     cwd = ZigBuilder.Zig.directory()
@@ -104,6 +104,8 @@ defmodule ZigBuilder.Compiler do
         "ERTS_INCLUDE_DIR" => env("ERTS_INCLUDE_DIR", erts_include_dir),
         "ERL_INTERFACE_LIB_DIR" => env("ERL_INTERFACE_LIB_DIR", erl_ei_lib_dir),
         "ERL_INTERFACE_INCLUDE_DIR" => env("ERL_INTERFACE_INCLUDE_DIR", erl_ei_include_dir),
+        # TODO: remove later when zig builder will no longer throw out of memory errors
+        "ERTS_INCLUDE_DIR_FLAG" => "-I#{env("ERTS_INCLUDE_DIR", erts_include_dir)}",
 
         # Disable default erlang values
         "BINDIR" => nil,
