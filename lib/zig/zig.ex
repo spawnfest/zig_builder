@@ -167,4 +167,8 @@ defmodule ZigBuilder.Zig do
   def unarchive_zig(archive) do
     System.cmd("tar", ["xvf", archive], cd: @zig_dir_path)
   end
+
+  def zig_downloaded?() do
+    File.exists?(directory())
+  end
 end
