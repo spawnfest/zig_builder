@@ -4,12 +4,18 @@ defmodule Mix.Tasks.ZigBuilder.Generate.Exe do
   @shortdoc "Task for generation of a sample build.zig for executables"
 
   alias ZigBuilder.GenerateUtils
+  alias ZigBuilder.Zig
 
   def run([]) do
-    generate_exe("build.zig")
+    run(["build.zig"])
   end
 
   def run([name]) do
+    if !Zig.zig_downloaded?() do
+      IO.puts("Zig missing, downloading now...")
+      Zig.fetch!()
+    end
+
     generate_exe(name)
   end
 
@@ -21,8 +27,8 @@ defmodule Mix.Tasks.ZigBuilder.Generate.Exe do
     File.mkdir_p!(cwd)
 
     # build_file_arg = ["--build-file", Path.join([File.cwd!(), "build.zig"])]
-    cache_dir_arg = ["--cache-dir", Path.join(cwd, "zig-cache")]
-    base = exec |> Path.basename() |> Path.rootname()
+    # cache_dir_arg = ["--cache-dir", Path.join(cwd, "zig-cache")]
+    # base = exec |> Path.basename() |> Path.rootname()
     args = ["init-exe"] |> List.flatten()
 
     case GenerateUtils.cmd(exec, args, cwd, [], false) do

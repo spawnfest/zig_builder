@@ -24,7 +24,7 @@ defmodule ZigBuilder.Compiler do
     cwd = ZigBuilder.Zig.directory()
     build_file_arg = ["--build-file", Path.join([File.cwd!(), "build.zig"])]
     cache_dir_arg = ["--cache-dir", Path.join(cwd, "zig-cache")]
-    base = exec |> Path.basename() |> Path.rootname()
+    _base = exec |> Path.basename() |> Path.rootname()
     args = ["build", build_file_arg, cache_dir_arg] |> List.flatten()
 
     case cmd(exec, args, cwd, env, "--verbose" in task_args) do
