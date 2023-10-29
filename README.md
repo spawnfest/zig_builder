@@ -19,7 +19,7 @@ by adding `zig_builder` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:zig_builder, "~> 0.1.0"}
+    {:zig_builder, git: "https://github.com/spawnfest/zig_builder.git"}
   ]
 end
 ```
@@ -119,6 +119,11 @@ mix zig_builder.generate.lib
 ### Tips
 - Ensure Zig is set up correctly in your environment to maximize the potential of these Mix tasks.
 - Stay updated with Zig and ZigBuilder releases for enhanced capabilities and compatibility.
+
+
+## Getting Started with ZigBuilder
+
+For a practical demonstration of the `ZigBuilder` library in action, check out our demo project at [ZigBuilder Demo Project](https://github.com/D4no0/zig_builder_demo). This will provide insights into how to set up and use `ZigBuilder` effectively in a real-world scenario.
 
 ## Contribution
 
