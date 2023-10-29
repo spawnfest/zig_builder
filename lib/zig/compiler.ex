@@ -18,7 +18,7 @@ defmodule ZigBuilder.Compiler do
   end
 
   def build(config, task_args) do
-    exec = "zig"
+    exec = Path.join([ZigBuilder.Zig.directory(), "zig"])
     env = default_env(config, %{})
 
     cwd = ZigBuilder.Zig.directory()
