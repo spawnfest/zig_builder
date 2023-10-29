@@ -1,8 +1,8 @@
 # ZigBuilder
 
-Mix tasks for installing and invoking [zig](https://ziglang.org/) 
+Mix tasks for installing and generation of [zig](https://ziglang.org/) build files and compilation of projects. 
 
-ZigBuilder is a library providing seamless integration between Elixir and the Zig compiler, allowing developers to replace `cmake` with `zig_builder`.
+ZigBuilder is a library providing seamless integration between Elixir and Zig, allowing developers to replace third party tools like `cmake` with an universal builder provided by zig.
 
 ## Features
 
@@ -31,6 +31,8 @@ zig version of choice:
 config :zig_builder, version: "0.11.0"
 ```
 
+**Warning** Only version 0.11.0 was officially tested by now.
+
 Now you can install zig_builder by running:
 
 ```bash
@@ -47,7 +49,7 @@ Where `TARGET` is your system target architecture.
 
 ## ZigBuilder Mix Tasks
 
-The `ZigBuilder` offers two key Mix tasks to enhance the integration between Zig and Elixir. These tasks help you set up Zig build configurations optimized for your project.
+The `ZigBuilder` offers several Mix tasks to enhance the integration between Zig and Elixir. These tasks help you set up Zig build configurations optimized for your project.
 
 ### `mix zig_builder.get`
 
