@@ -199,4 +199,8 @@ defmodule ZigBuilder.Zig do
       Path.expand("_build/#{name}")
     end
   end
+
+  def zig_downloaded?() do
+    File.exists?(directory())
+  end
 end
